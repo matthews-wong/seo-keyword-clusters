@@ -1,0 +1,69 @@
+# Bundled sample keyword list for seo-keyword-clusters (offline demo).
+# Two loose themes: running shoes and home coffee / espresso.
+# One keyword per line. Lines starting with # are ignored.
+
+# --- running shoes theme ---
+best running shoes for beginners
+buy running shoes online
+running shoes for flat feet
+how to clean running shoes
+cheap running shoes for men
+running shoes vs walking shoes
+top running shoes 2026
+running shoes near me
+lightweight running shoes for marathon
+running shoes price comparison
+what are stability running shoes
+trail running shoes review
+buy nike running shoes
+running shoes for wide feet
+affordable running shoes for women
+how to choose running shoes
+running shoes discount code
+waterproof trail running shoes
+best budget running shoes
+running shoes for plantar fasciitis
+minimalist running shoes guide
+running shoes sale
+best marathon running shoes
+running shoes for overpronation
+adidas running shoes official website
+how long do running shoes last
+running shoes cushioning explained
+compare running shoes brands
+running shoes for treadmill
+zero drop running shoes review
+
+# --- home coffee / espresso theme ---
+best espresso machine for home
+buy espresso machine online
+how to make espresso at home
+cheap coffee maker for office
+espresso machine vs coffee maker
+top coffee makers 2026
+coffee maker near me
+what is a burr grinder
+best coffee grinder for espresso
+espresso machine price
+buy breville espresso machine
+how to clean a coffee maker
+affordable espresso machine for beginners
+coffee maker with grinder review
+best drip coffee maker
+espresso machine reviews
+how does a pod coffee maker work
+coffee maker deals
+manual espresso machine guide
+best coffee beans for espresso
+coffee grinder comparison
+espresso machine descaling tips
+buy coffee maker with milk frother
+single serve coffee maker review
+pour over coffee maker for beginners
+cold brew coffee maker
+best pod coffee machine
+espresso machine subscription
+delonghi espresso machine official
+how to froth milk for espresso
+best value coffee maker
+cheapest espresso machine

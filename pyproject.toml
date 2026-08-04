@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "seo-keyword-clusters"
+version = "0.1.0"
+description = "Offline CLI that clusters SEO keywords into topics and classifies their search intent."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Matthews Wong" }]
+keywords = ["seo", "keywords", "clustering", "search-intent", "tf-idf", "cli"]
+classifiers = [
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Environment :: Console",
+    "Topic :: Text Processing :: Linguistic",
+]
+dependencies = [
+    "scikit-learn>=1.4,<2.0",
+    "pandas>=2.0,<3.0",
+    "click>=8.1,<9.0",
+    "rich>=13.0,<14.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0,<9.0"]
+
+[project.scripts]
+seo-keyword-clusters = "keywordclusters.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/matthews-wong"
+
+[tool.setuptools]
+packages = ["keywordclusters"]
+
+[tool.setuptools.package-data]
+keywordclusters = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
