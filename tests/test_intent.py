@@ -58,6 +58,24 @@ def test_word_boundary_prevents_false_positive() -> None:
     assert "how" not in result.signals
 
 
+def test_multiword_modifier_does_not_match_mid_word() -> None:
+    # Regression: multi-word modifiers were matched as naive substrings, so
+    # "log in" fired inside "cata[log in]ventory", mislabelling a plain topic
+    # query as navigational. Multi-word phrases must respect word boundaries.
+    result = classify_intent("catalog inventory software")
+    assert result.intent == DEFAULT_INTENT
+    assert result.signals == ()
+    # And "what is" must not fire inside "some[what is]olated".
+    assert classify_intent("somewhat isolated topic").signals == ()
+
+
+def test_multiword_modifier_still_matches_as_a_phrase() -> None:
+    # The boundary fix must not regress legitimate multi-word matches.
+    assert classify_intent("coffee maker near me").intent == "transactional"
+    assert "near me" in classify_intent("coffee maker near me").signals
+    assert classify_intent("how to clean running shoes").intent == "informational"
+
+
 def test_signals_are_reported_for_a_match() -> None:
     result = classify_intent("best budget trail running shoes review")
     assert result.intent == "commercial"

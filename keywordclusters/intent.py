@@ -138,11 +138,14 @@ class IntentResult:
 def _matches(text: str, modifier: str) -> bool:
     """Return True if ``modifier`` appears in ``text`` on word boundaries.
 
-    Multi-word modifiers ("near me") and modifiers containing punctuation
-    (".com") are matched as substrings/phrases; single tokens are matched on
-    word boundaries so "how" does not fire inside "however".
+    Every alphanumeric modifier -- single tokens ("how") *and* multi-word
+    phrases ("near me") -- is matched on word boundaries so it cannot fire
+    mid-word: "how" must not match inside "however", and "log in" must not
+    match inside "catalog inventory". Only modifiers carrying punctuation
+    (".com") fall back to a literal substring test, since a word boundary
+    cannot sit next to a non-word character like ".".
     """
-    if " " in modifier or not modifier.isalnum():
+    if not all(char.isalnum() or char.isspace() for char in modifier):
         return modifier in text
     return re.search(rf"\b{re.escape(modifier)}\b", text) is not None
 

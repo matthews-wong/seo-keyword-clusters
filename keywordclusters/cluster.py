@@ -2,9 +2,10 @@
 
 The pipeline is:
 
-1. Vectorize keywords with a TF-IDF model that blends word unigrams/bigrams
-   with character n-grams. Character n-grams help short SEO phrases group by
-   shared roots ("run"/"running"/"runner") even without exact token overlap.
+1. Vectorize keywords with a TF-IDF model over word unigrams and bigrams.
+   Bigrams keep short SEO phrases that share a head term ("running shoes"
+   vs "running gear") distinguishable, while a shared stop-word-filtered
+   vocabulary lets related phrases group by their overlapping topic tokens.
 2. Cluster the sparse vectors with KMeans (default) or agglomerative
    clustering. A fixed ``random_state`` makes KMeans fully reproducible.
 3. Auto-label each cluster by its most distinctive TF-IDF terms.
@@ -92,9 +93,9 @@ class ClusterResult:
 def build_vectorizer() -> TfidfVectorizer:
     """Build the TF-IDF vectorizer used for clustering.
 
-    Combines word unigrams+bigrams with character n-grams (via ``char_wb``)
-    so morphologically related keywords share features. ``sublinear_tf``
-    dampens the effect of repeated tokens in longer phrases.
+    Uses word unigrams and bigrams with the shared stop-word list so keywords
+    group by their overlapping topic tokens. ``sublinear_tf`` dampens the
+    effect of repeated tokens in longer phrases.
     """
     return TfidfVectorizer(
         analyzer="word",
@@ -156,8 +157,8 @@ def _label_clusters(
             continue
 
         centroid = dense[member_mask].mean(axis=0)
-        # Prefer single-word features for readable labels, but fall back to
-        # whatever ranks highest if unigrams are exhausted.
+        # Rank features by their mean TF-IDF weight in the cluster (highest
+        # first) and take the top distinct terms, dropping zero-weight ones.
         ranked = np.argsort(centroid)[::-1]
         terms: list[str] = []
         for idx in ranked:

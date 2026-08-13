@@ -43,14 +43,14 @@ Python 3.11 · scikit-learn · pandas · Click · Rich
 ```bash
 pip install -e .
 # cluster + classify the bundled sample list
-seo-keyword-clusters --input data/keywords_sample.txt
-# choose the number of clusters and export Markdown
-seo-keyword-clusters --input data/keywords_sample.txt --clusters 6 --format markdown
+seo-keyword-clusters run
+# point at your own file, choose the number of clusters, export Markdown
+seo-keyword-clusters run -k data/keywords_sample.txt -n 6 --markdown clusters.md
 ```
 
 ## Usage
 
-Point `--input` at any newline-delimited keyword file. The tool prints each topic cluster with its auto-derived label and members, and an intent column per keyword. With two clearly separable themes and `--clusters 2`, each theme collapses into its own cluster — the behavior the test suite pins down.
+All work happens under the `run` subcommand. Point `-k`/`--keywords` at any newline-delimited keyword file (or omit it to use the bundled sample). The tool prints each topic cluster with its auto-derived label and members, and an intent column per keyword. Use `-n`/`--num-clusters` to set the cluster count and `--csv` / `--markdown` to export. With two clearly separable themes and `-n 2`, each theme collapses into its own cluster — the behavior the test suite pins down.
 
 ## Project structure
 
@@ -67,7 +67,7 @@ tests/          # pytest: clustering separation, determinism, intent rules
 ## Testing
 
 ```bash
-pip install -e . pytest
+pip install -e ".[dev]"
 pytest
 ```
 
